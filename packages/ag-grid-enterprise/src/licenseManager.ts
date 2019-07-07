@@ -11,21 +11,21 @@ export class LicenseManager {
 
     @PreConstruct
     public validateLicense(): void {
-        if (_.missingOrEmpty(LicenseManager.licenseKey)) {
-            this.outputMissingLicenseKey();
-        } else if (!_.missingOrEmpty(LicenseManager.licenseKey) && LicenseManager.licenseKey.length > 32) {
-            const {md5, license, version, isTrial} = LicenseManager.extractLicenseComponents(LicenseManager.licenseKey);
+        // if (_.missingOrEmpty(LicenseManager.licenseKey)) {
+        //     this.outputMissingLicenseKey();
+        // } else if (!_.missingOrEmpty(LicenseManager.licenseKey) && LicenseManager.licenseKey.length > 32) {
+        //     const {md5, license, version, isTrial} = LicenseManager.extractLicenseComponents(LicenseManager.licenseKey);
 
-            if (md5 === this.md5.md5(license)) {
-                if (_.exists(version) && version) {
-                    this.validateLicenseKeyForVersion(version, !!isTrial, license);
-                } else {
-                    this.validateLegacyKey(license);
-                }
-            } else {
-                this.outputInvalidLicenseKey();
-            }
-        }
+        //     if (md5 === this.md5.md5(license)) {
+        //         if (_.exists(version) && version) {
+        //             this.validateLicenseKeyForVersion(version, !!isTrial, license);
+        //         } else {
+        //             this.validateLegacyKey(license);
+        //         }
+        //     } else {
+        //         this.outputInvalidLicenseKey();
+        //     }
+        // }
     }
 
     private static extractExpiry(license: string) {

@@ -14,7 +14,11 @@ export class AgGridColumn {
     public static toColDef(column: any): ColDef {
         const colDef: ColDef = AgGridColumn.createColDefFromGridColumn(column);
         if (column.children && column.children.length > 0) {
-            (colDef as any).children = AgGridColumn.getChildColDefs(column.children);
+            // (colDef as any).children = AgGridColumn.getChildColDefs(column.children);
+            (colDef as any).children = column.children.map((childrenItem: any) => {
+                return AgGridColumn.toColDef(childrenItem);
+            });
+
         }
         return colDef;
     }
